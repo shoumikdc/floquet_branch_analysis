@@ -438,7 +438,9 @@ class FloquetAnalysis(Serializable):
         all_quasienergies = np.array(all_quasienergies).reshape(
             (len(self.model.omega_d_values), len(amp_range_vals), self.hilbert_dim)
         )
-        bare_state_overlaps = floquet_mode_array[..., 0]
+        # The overlap magnitude is real by construction.  Returning it as a
+        # real array avoids a spurious ComplexWarning when ranges are assembled.
+        bare_state_overlaps = np.real(floquet_mode_array[..., 0])
         floquet_modes = floquet_mode_array[..., 1:]
         return (
             bare_state_overlaps,

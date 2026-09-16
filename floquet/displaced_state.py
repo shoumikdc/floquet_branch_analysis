@@ -241,7 +241,9 @@ class DisplacedStateFit(DisplacedState):
 
             # Get the floquet mode for the state, and subtract off the bare state
             # i.e. only fit the perturbation.
-            state_to_fit = floquet_modes[:, :, array_idx, :]
+            # Work on a copy: subtracting the bare state must not mutate the
+            # stored Floquet modes that are reused for the final overlap pass.
+            state_to_fit = floquet_modes[:, :, array_idx, :].copy()
             state_to_fit -= np.tile(
                 self.model.bare_state_array()[None, None, state_idx, :],
                 (state_to_fit.shape[0], state_to_fit.shape[1], 1),
