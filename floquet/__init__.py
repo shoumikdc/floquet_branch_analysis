@@ -1,6 +1,7 @@
 from importlib.metadata import version
 
 from .amplitude_converters import ChiacToAmp as ChiacToAmp, XiSqToAmp as XiSqToAmp
+from .ats import ATSModel as ATSModel, ExactSumFluxModel as ExactSumFluxModel
 from .floquet import (
     DisplacedState as DisplacedState,
     DisplacedStateFit as DisplacedStateFit,
